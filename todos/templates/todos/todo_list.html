@@ -28,8 +28,17 @@
           <td scope="row">{{task.deadline}}</td>
           <td scope="row">{{task.finished_at|default:"-"}}</td>
           <td>
-            <a href="#" class="btn btn-primary btn-sm">Concluir</a>
-            <a href="#" class="btn btn-danger btn-sm">Excluir</a>
+            <a href={% url "todo_finish_task" pk=task.pk%}
+            class="btn btn-primary btn-sm
+            {% if task.finished_at %} disabled {% endif %}"
+            >Concluir</a>
+            <a href={% url "todo_update" pk=task.pk%}
+            class="btn btn-secundary btn-sm
+            {% if task.finished_at %} disabled {% endif %}" style="background-color: #FFFF52"
+            >Editar</a>
+            <a href={% url "todo_delete" pk=task.pk%}
+            class="btn btn-danger btn-sm"
+            >Excluir</a>
           </td>
         </tr>
         {% endfor%}
